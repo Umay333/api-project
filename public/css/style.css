@@ -1,0 +1,58 @@
+body {
+    background-color: #A2B396;
+    font-family: 'Ubuntu', sans-serif;
+    color: #6671B0;
+}
+
+h2 {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 3rem;
+
+}
+
+form, div {
+    border: 1px solid #6671B0;
+    border-radius: 3px;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    margin: 1rem;
+}
+
+button {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bolder;
+    color: #6671B0;
+    padding: 0.5rem;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+
+}
+
+button:hover {
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+
+}
+
+#getRandom {
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+img {
+    border: 1px solid #6671B0;
+}
+
+input {
+    outline: none;
+    border: none;
+    border-radius: 3px;
+    padding: 0.5rem;
+}
