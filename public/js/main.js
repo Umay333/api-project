@@ -1,29 +1,54 @@
- document.querySelector('#find').addEventListener(('click'), apiRequest)
- document.querySelector("#getRandom").addEventListener("click", apiRequestRandom )
+const deleteText = document.querySelectorAll('.fa-trash')
+const thumbText = document.querySelectorAll('.fa-thumbs-up')
 
- async function apiRequest(){
-    const artistName = document.getElementById("artistName").value
-     try{
-        const response = await fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects?artistDisplayName=${artistName}`)
-         const data = await response.json()
-         const artwork = data.results
-         console.log(artwork)
-         document.querySelector("p").innerText = artwork.title
-         document.querySelector("img").src = artwork.primaryImage
-     } catch(error){
-        console.log(error)
-     }
- }
- async function apiRequestRandom(){
-     const randomArtworkID = Math.floor(Math.random() * 820)
-     try{
-         const response = await fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/[objectID]/?objectID=${randomArtworkID}`)
-         const data = await response.json()
-         const randomArtwork = data
-         console.log(randomArtwork)
-         document.querySelector("p").innerText = randomArtwork.title
-         document.querySelector("img").src = randomArtwork.primaryImage
-     } catch(error){
-         console.log(error)
-     }
- }
+Array.from(deleteText).forEach((element) => {
+    element.addEventListener('click', deleteArtwork)
+})
+
+Array.from(thumbText).forEach((element) => {
+    element.addEventListener('click', addOneLike)
+})
+
+async function deleteArtwork() {
+    console.log('asd')
+    const aName = this.parentNode.childNodes[1].innerText
+    const pName = this.parentNode.childNodes[3].innerText
+    try {
+        const response = await fetch('deleteArtwork', {
+            method: 'delete',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                'artistName': aName,
+                'artworkName': pName
+            })
+        })
+        const data = await response.json()
+        console.log(data)
+        location.reload()
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+async function addOneLike() {
+    const aName = this.parentNode.childNodes[1].innerText
+    const pName = this.parentNode.childNodes[3].innerText
+    const tLikes = Number(this.parentNode.childNodes[5].innerText)
+    try {
+        const response = await fetch('addOneLike', {
+            method: 'put',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                'artistName': aName,
+                'artworkName': pName,
+                'likes': tLikes
+            })
+        })
+        const data = await response.json()
+        console.log(data)
+        location.reload()
+    } catch (err) {
+        console.log(err)
+    }
+
+}
